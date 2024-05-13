@@ -457,6 +457,7 @@ export class InternalGraphQLAPIClass {
 					query: print(query as DocumentNode),
 					variables,
 					appSyncGraphqlEndpoint: config?.endpoint,
+					customEndpoint: config?.customEndpoint,
 					region: config?.region,
 					authenticationType: authMode,
 					apiKey: config?.apiKey,

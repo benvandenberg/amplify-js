@@ -98,6 +98,7 @@ interface ParsedMessagePayload {
 
 export interface AWSAppSyncRealTimeProviderOptions {
 	appSyncGraphqlEndpoint?: string;
+	customEndpoint?: string;
 	authenticationType?: ResolvedGraphQLAuthModes;
 	query?: string;
 	variables?: Record<string, DocumentType>;
@@ -200,6 +201,7 @@ export class AWSAppSyncRealTimeProvider {
 	): Observable<Record<string, unknown>> {
 		const {
 			appSyncGraphqlEndpoint,
+			customEndpoint,
 			region,
 			query,
 			variables,
@@ -237,6 +239,7 @@ export class AWSAppSyncRealTimeProvider {
 									region,
 									authenticationType,
 									appSyncGraphqlEndpoint,
+									customEndpoint,
 									additionalHeaders,
 									apiKey,
 									authToken,
@@ -314,6 +317,7 @@ export class AWSAppSyncRealTimeProvider {
 	}) {
 		const {
 			appSyncGraphqlEndpoint,
+			customEndpoint,
 			authenticationType,
 			query,
 			variables,
@@ -397,6 +401,7 @@ export class AWSAppSyncRealTimeProvider {
 				apiKey,
 				appSyncGraphqlEndpoint,
 				authenticationType,
+				customEndpoint,
 				region,
 				additionalCustomHeaders,
 			});
@@ -714,6 +719,7 @@ export class AWSAppSyncRealTimeProvider {
 
 	private _initializeWebSocketConnection({
 		appSyncGraphqlEndpoint,
+		customEndpoint,
 		authenticationType,
 		apiKey,
 		region,
@@ -740,6 +746,7 @@ export class AWSAppSyncRealTimeProvider {
 						canonicalUri: '/connect',
 						apiKey,
 						appSyncGraphqlEndpoint,
+						customEndpoint,
 						region,
 						additionalCustomHeaders,
 					});
@@ -749,7 +756,8 @@ export class AWSAppSyncRealTimeProvider {
 
 					const payloadQs = base64Encoder.convert(payloadString);
 
-					let discoverableEndpoint = appSyncGraphqlEndpoint ?? '';
+					let discoverableEndpoint =
+						customEndpoint || appSyncGraphqlEndpoint || '';
 
 					if (this.isCustomDomain(discoverableEndpoint)) {
 						discoverableEndpoint =
@@ -931,6 +939,7 @@ export class AWSAppSyncRealTimeProvider {
 		payload,
 		canonicalUri,
 		appSyncGraphqlEndpoint,
+		customEndpoint,
 		region,
 		additionalCustomHeaders,
 	}: AWSAppSyncRealTimeAuthInput): Promise<
@@ -969,6 +978,7 @@ export class AWSAppSyncRealTimeProvider {
 				payload,
 				canonicalUri,
 				appSyncGraphqlEndpoint,
+				customEndpoint,
 				apiKey: resolvedApiKey,
 				region,
 				host,

@@ -52,6 +52,7 @@ export const parseAWSExports = (
 		aws_appsync_apiKey,
 		aws_appsync_authenticationType,
 		aws_appsync_graphqlEndpoint,
+		aws_appsync_customEndpoint,
 		aws_appsync_region,
 		aws_bots_config,
 		aws_cognito_identity_pool_id,
@@ -136,6 +137,7 @@ export const parseAWSExports = (
 		amplifyConfig.API = {
 			GraphQL: {
 				endpoint: aws_appsync_graphqlEndpoint,
+				customEndpoint: aws_appsync_customEndpoint,
 				apiKey: aws_appsync_apiKey,
 				region: aws_appsync_region,
 				defaultAuthMode: defaultAuthMode ?? 'iam',

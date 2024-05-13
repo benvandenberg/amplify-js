@@ -176,6 +176,7 @@ export interface GraphqlSubscriptionMessage<T> {
 
 export interface AWSAppSyncRealTimeProviderOptions {
 	appSyncGraphqlEndpoint?: string;
+	customEndpoint: string;
 	authenticationType?: GraphQLAuthMode;
 	query?: string;
 	variables?: Record<string, unknown>;
